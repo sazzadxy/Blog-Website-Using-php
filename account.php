@@ -18,6 +18,8 @@ class Account
          if ($this->db->rowCount()>0) {
              $_SESSION['username'] = $_POST['username'];
              header("Location:result.php");
+         } else {
+            echo "<div class='alert alert-danger' style='text-align:center'>Wrong username or password!</div>";
          }
 
     }
