@@ -13,13 +13,13 @@ class DB
     public function __construct()
     {
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
-        $option = array(
+        $options = array(
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_PERSISTENT => true
         );
 
         try {
-            $this->connection = new PDO($dsn, $this->user, $this->password);
+            $this->connection = new PDO($dsn, $this->user, $this->password, $options);
             $this->dbconnected = true;
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
