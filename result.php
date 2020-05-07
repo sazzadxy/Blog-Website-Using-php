@@ -42,8 +42,10 @@ $post = new Post;
                 <td><?php echo date('D, d M Y h:i:s a',  strtotime($posts->created_at)); ?></td>
                 <td>
                     <a href="view.php?slug=<?php echo $posts->slug;?>"><button type="submit" class="btn btn-outline-success btn-sm">View</button></a>
+                <?php if($_SESSION['username'] == $posts->user) : ?>
                     <a href="edit.php?slug=<?php echo $posts->slug;?>"><button type="submit" class="btn btn-outline-primary btn-sm">Edit</button></a>
                     <a href="delete.php?slug=<?php echo $posts->slug;?>" onclick="return confirm('Are you sure you want to delete?');"><button type="submit" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                <?php endif; ?>
                 </td>
             </tr>
             <?php }?>
@@ -71,17 +73,17 @@ $post = new Post;
 
             $page = $_GET['page'];    
             if ($page>1) {
-                $pageLink.="<a class='page-link'href='index.php?page=1'>First</a>";
-                $pageLink.="<a class='page-link'href='index.php?page=".($page-1)."'><<<</a>";
+                $pageLink.="<a class='page-link'href='result.php?page=1'>First</a>";
+                $pageLink.="<a class='page-link'href='result.php?page=".($page-1)."'><<<</a>";
             }
             
             for ($i=1; $i <= $totlaPages; $i++) { 
-                $pageLink.="<a class='page-link' href='index.php?page=".$i."'>".$i."</a>";
+                $pageLink.="<a class='page-link' href='result.php?page=".$i."'>".$i."</a>";
             }
 
             if ($page<=$totlaPages) {
-                $pageLink.="<a class='page-link'href='index.php?page=".($page+1)."'>>>></a>";
-                $pageLink.="<a class='page-link'href='index.php?page=".$totlaPages."'>Last</a>";
+                $pageLink.="<a class='page-link'href='result.php?page=".($page+1)."'>>>></a>";
+                $pageLink.="<a class='page-link'href='result.php?page=".$totlaPages."'>Last</a>";
             }
 
             echo $pageLink."</ul>"; 
